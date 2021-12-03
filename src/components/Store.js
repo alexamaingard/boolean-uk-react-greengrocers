@@ -175,6 +175,10 @@ const Store = () => {
         <ul className="item-list store--item-list">
           {storeItems.map(storeItem =>
               <li>
+                <details>
+                  <summary>{storeItem.name}</summary>
+                  <p>£ {storeItem.price}</p>
+                </details>
               <div className="store--item-icon">
                   <img src={`./assets/icons/${storeItem.id}.svg`} alt={storeItem.name}/>
               </div>
