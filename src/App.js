@@ -1,7 +1,7 @@
 import './styles/reset.css'
 import './styles/index.css'
 
-import Store from './Store'
+import Store from './components/Store'
 
 /*
 Here's what a store item should look like

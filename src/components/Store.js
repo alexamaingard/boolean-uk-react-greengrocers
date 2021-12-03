@@ -1,4 +1,4 @@
-import './styles/store.css'
+import '../styles/store.css'
 
 import React, { useState } from "react";
 
@@ -58,25 +58,56 @@ const initialStoreItems = [
     }
 ]
 
+
+
 const Store = () => {
-    const [groceries, setGroceries] = useState(initialStoreItems)
+    const [storeItems, setStoreItems] = useState(initialStoreItems)
+    const [cartItems, setCartItems] = useState([])
+
+    const addToCart = (storeItem) => {
+        let alreadyInCart = false;
+        const updatedCartItems = cartItems.map(cartItem => {
+          if (storeItem.id === cartItem.item.id) {
+            const cartItemToUpdate = {
+              ...cartItem,
+              quantity: cartItem.quantity + 1
+            };
+            alreadyInCart = true;
+            return cartItemToUpdate;
+          } 
+          else {
+            return cartItem;
+          }
+        });
+        if (!alreadyInCart) {
+          const newCartItem = {
+            item: storeItem,
+            quantity: 1
+          };
+          setCartItems([...cartItems, newCartItem]); 
+        } 
+        else {
+          setCartItems(updatedCartItems); 
+        }
+      }
+    
 
     return (
         <>
             <header id="store">
             <h1>Greengrocers</h1>
-            <ul class="item-list store--item-list">
-            {groceries.map(grocery =>
+            <ul className="item-list store--item-list">
+            {storeItems.map(storeItem =>
                 <li>
                 <div className="store--item-icon">
-                    <img src={`./assets/icons/${grocery.id}.svg`} alt={grocery.name}/>
+                    <img src={`./assets/icons/${storeItem.id}.svg`} alt={storeItem.name}/>
                 </div>
-                <button onClick={() => addItem()}>Add to cart</button>
+                <button id={storeItem.name} onClick={() => addToCart(storeItem)}>Add to cart</button>
                 </li>
                 )}
             </ul>
         </header>
-        <Cart />
+        <Cart addToCart={addToCart} cartItems={cartItems}/>
         <Footer /> 
       </>
     )
