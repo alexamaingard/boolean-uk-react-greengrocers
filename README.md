@@ -1,5 +1,7 @@
 # React Greengrocers
 
+(done with Can-Tina)
+
 You're going to recreate the [javascript greengrocers exercise](./images/greengrocer-exercise.gif) from scratch. But this time, using React!
 
 Reusing an exercise that you already know will help you understand the fundamentals of React.
